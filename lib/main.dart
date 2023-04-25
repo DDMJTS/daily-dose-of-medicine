@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'DetailView.dart';
+import 'Setting.dart';
 
 void main() {
   runApp(DDMApp());
@@ -55,6 +56,20 @@ class DDMApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Daily Dose of Medicine'),
+          elevation: 0.0,
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Setting(),
+                  ),
+                );
+              }, 
+              icon: Icon(Icons.settings))
+          ],
         ),
         body: ListView.builder(
           itemCount: journals.length,
