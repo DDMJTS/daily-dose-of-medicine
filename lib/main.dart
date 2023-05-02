@@ -53,43 +53,50 @@ class DDMApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Daily Dose of Medicine',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Daily Dose of Medicine'),
-          elevation: 0.0,
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Setting(),
+      home: Navigator(
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            builder: (BuildContext context) => Scaffold(
+              appBar: AppBar(
+                title: const Text('Daily Dose of Medicine'),
+                elevation: 0.0,
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,  
+                        MaterialPageRoute(
+                          builder: (context) => Setting(),
+                        ),
+                      );
+                    }, 
+                    icon: Icon(Icons.settings),
                   ),
-                );
-              }, 
-              icon: Icon(Icons.settings))
-          ],
-        ),
-        body: ListView.builder(
-          itemCount: journals.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text(journals[index].title),
-              subtitle: Text(journals[index].author + ' - ' + journals[index].date),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailView(journal: journals[index]),
-                  ),
-                );
-              },
-            );
-          },
-        ),
+                ],
+              ),
+              body: ListView.builder(
+                itemCount: journals.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(journals[index].title),
+                    subtitle: Text(journals[index].author + ' - ' + journals[index].date),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailView(journal: journals[index]),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            settings: settings,
+          );
+        },
       ),
     );
   }
 }
-
